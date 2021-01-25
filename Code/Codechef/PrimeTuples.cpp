@@ -2,23 +2,39 @@
 using namespace std;
 typedef long long ll;
 
-vector<bool>primes(1000005,true);
-vector<int> ans;
+const int mxN = int(1e6) + 5;
+vector<bool>is_prime(mxN,true);
+vector<int> primes;
+vector<int> ans(mxN);
+
 void sieve(){
     
-    primes[0] = primes[1] = false;
+    is_prime[0] = is_prime[1] = false;
     
-    for(int i = 2 ; i*i <= 1000000 ; i++){
-        if(primes[i]){
-        	for(int j = i*i ; j <= 1000000 ; j+=i){
-                primes[j] = false;
+    for(int i = 2 ; i*i <= mxN ; i++){
+        if(is_prime[i]){
+        	for(int j = i*i ; j <= mxN ; j+=i){
+                is_prime[j] = false;
             }
         }
     }
-    for(int i = 2 ; i <= 100000 ; i++){
-    	if(primes[i]) ans.push_back(i);
+    for(int i = 2 ; i <= mxN ; i++){
+    	if(is_prime[i]) primes.push_back(i);
     }
 }
+
+
+void precompute(){
+		int cnt = 0;
+		int j = 2;
+		
+		while(j <= mxN){
+			if(is_prime[j-2] && is_prime[j]) cnt++;
+			ans[j] = cnt;
+			j++;
+		}
+}
+
 
 
 int main(){
@@ -28,29 +44,13 @@ int main(){
 	clock_t start = clock();
 	
 	sieve();
+	precompute();
 	int t;
 	cin >> t;
 	while(t--){
 		int n;
 		cin >> n;
-		
-		int val = ans.size();
-		int cnt = 0;
-		
-		int i = 0, j = 1;
-		
-//		cout << (primes[17] ? "prime " : "not") << endl;
-//		O(n) + O(nloglogn)
-
-		while(j < val && ans[j] <= n-2){
-			int sum = ans[0] + ans[j];
-			if(primes[sum] && sum <= n){
-				cnt++;
-			}
-			
-			if(sum > n) break;
-			j++;
-		}
-		cout << cnt  << '\n';
+		cout << ans[n] << '\n';		
 	}
+//	cerr << clock() - start << endl;	
 }
