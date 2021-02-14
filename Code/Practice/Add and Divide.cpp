@@ -17,31 +17,19 @@ int main(){
 		ll a,b;
 		cin >> a >> b;
 		
-		dbg(a,b);
-		break;
+		int ans = INT32_MAX - 1;
 		
-//		if(a == b){
-//			cout << 2 << endl;
-//			continue;
-//		}
-//		
-//		else if(b > a){
-//			cout << 1 << endl;
-//			continue;
-//		}
-		
-		bool ok = true;
-		int cnt = 0;
-		for(int i = 0 ; ; i++){
-			
-			(b == 1) ? (b++) : (a /= b) ;
-			cnt++;
-			
-			if(a == b || a < b || a == 0){
+		for(int i = 0 ; i <= 100 ; i++){
+			int tmp = b + i;
+			if(tmp == 1) continue;
+			int val = a, cnt = i;
+			while(val!=0){
+				val /= tmp;
 				cnt++;
-				break;
 			}
+			ans = min(ans, cnt);
 		}
-		cout << cnt + 1 << endl;
+		
+		cout << ans << endl;
 	}
 }
