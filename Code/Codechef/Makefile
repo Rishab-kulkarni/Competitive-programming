@@ -7,15 +7,12 @@ CC = g++
 # target should be generic
 
 CFLAGS = -g -Wall -O2 -Wfatal-errors  -std=c++17
-TARGET = a
+TARGET = a b c d e f g h
 
 all : $(TARGET)
-$(TARGET) : $(TARGET).cpp
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).cpp
+$(TARGET) : %: %.cpp
+	$(CC) $(CFLAGS) -o $@ $<
 	
 clean:
 	$(RM) $(TARGET)
-	
-	
-
 
