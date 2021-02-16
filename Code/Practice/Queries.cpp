@@ -2,17 +2,24 @@
 using namespace std;
 typedef long long ll;
 
+vector<int> a;
+vector<int> pref;
 string s; int n;
-map<pair<int,int>,int>st;
+
 void precompute(){
-	for(int i = 0; i < n ; i++){
-		for(int j = i+1 ; j < n ; j++){
-			int cnt = 0;
-			for(int k = i ; k < j ; k++){
-				if(s[k] == s[k+1]) cnt++;
-			}
-			st[{i,j}] = cnt;
-		}
+
+	a.resize(n+1);
+	for(int i = 0 ; i < n ; i++){
+		if(s[i] == s[i+1]){
+			a[i+1] = 1;
+		} 
+	}
+	
+	pref.resize(n+1);
+	int sum = 0;
+	for(int i = 1 ; i <= n ; i++){
+		sum += a[i];
+		pref[i] = sum;
 	}
 }
 
@@ -26,11 +33,13 @@ int main(){
 	n = s.length();
 	
 	precompute();
+		
 	
 	int m; cin >> m;	
 	while(m--){
 		int l,r;
 		cin >> l >> r;
-		cout << st[{l,r}] << '\n';
+		r--; l--;
+		cout << pref[r] - pref[l] << '\n';
 	}
 }
