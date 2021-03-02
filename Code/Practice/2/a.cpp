@@ -2,39 +2,35 @@
 using namespace std;
 typedef long long ll;
 
-const int mxN = 1e9 + 7;
-
 void solve(){
-	int n; cin >> n;
-	vector<int> a(n+1);
-	for(int i = 1 ; i <= n ; ++i) cin >> a[i];
-	
-	vector<int> ans(n+1);
-	
-	int mx = 0;
-	for(int i = n ; i >= 1 ; --i){
-		if(i == n){
-			ans[i] = 0;
-			mx = max(a[i],mx);			
-			continue;
-		} 
-		if(mx == a[i]){
-			ans[i] = 1;
-		}
-		
-		else if(a[i] > mx){
-			ans[i] = 0;
-			mx = a[i];
-		}
-		
-		else{
-			ans[i] = mx - a[i] + 1;
-		}
-		
+	string s;
+	cin >> s;
+	int n = s.length();	
+	if(s[0] == s[n - 1]){
+		cout<<"NO\n"; return;
 	}
 	
-	for(int i = 1 ; i <= n ; i++) cout << ans[i] << ' ';
-	cout << '\n'; 
+	int cnt;
+	bool ok = true;
+	// iterating over all possibilites  
+	for(int val = -1 ; val < 2 ;val+=2){
+		cnt = 1;
+
+		for(int i = 1 ;i < n ; i++){
+			if(s[i] == s[0]) cnt++;
+			else if(s[i] == s[n - 1]) cnt--;
+			else {
+				cnt += val;
+			}
+		}
+		
+		cout << cnt << '\n';
+		if(cnt == 0) {
+			ok = false;
+			break;
+		}				
+	}
+	cout << (!ok ? "YES" : "NO") << '\n';	
 }
 
 int main(){
@@ -43,7 +39,7 @@ int main(){
 	cin.tie(0);
 
 	int t = 1; 
-//	cin >> t;
+	cin >> t;
 	while(t--){
 		solve();	
 	}
