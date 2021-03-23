@@ -4,19 +4,18 @@ using namespace std;
 typedef long long ll;
 
 void solve(){
-	int a,b;
-	cin >> a >> b;
+	int n; cin >> n;
+	vector<int> a(n+1);
+	for(int i = 1 ; i <= n ; i++) cin >> a[i];
 	
-	int ans = min(a,b);
+	int i = 1, j = n;
+	while(i < j){
+		swap(a[i], a[j]);
+		i+=2;
+		j-=2;
+	}
 	
-	a-= ans;
-	b-= ans;
-	
-	cout << ans << ' '; 
-	if(a!=0) cout << a/2 << ' ';
-	else if(b!=0) cout << b/2 << ' ';
-	else if(a == 0 && b == 0) cout << 0 << ' ';
-	
+	for(int i = 1 ; i<= n ; i++) cout << a[i] << ' ';  
 	cout << '\n';
 }
 
