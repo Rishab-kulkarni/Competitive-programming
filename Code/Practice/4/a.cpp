@@ -5,27 +5,28 @@ using namespace std;
 typedef long long ll;
 
 void solve(){
-	int n; cin >> n;
-	vector<pair<int,int>> a(n);
-	for(int i = 0 ; i < n ; i++) cin >> a[i].first >> a[i].second; 
-	
-	string ans = "";
-	int w1 = 0, w2 = 0;
+	int n,m, mn = INT32_MAX - 1; cin >> n >> m;
+	vector<vector<int>> a(n, vector<int>(m));
 	for(int i = 0 ; i < n ; i++){
-		w1 += a[i].first;
-		if(abs(w1 - w2) <= 500) ans += "A";
-		
-		else{
-			w1 -= a[i].first;
-			w2 += a[i].second;
-			if(abs(w1 - w2) <= 500) ans += "G";
-			else{
-				cout << -1 << '\n'; return;
-			}
+		for(int j = 0 ; j < m ; j++) {
+			cin >> a[i][j];
+			mn = min(a[i][j], mn);	
 		}
 	}
-	assert((int)ans.length() == n);
-	cout << ans << '\n'; 
+
+	bool vis[n] = {0};
+	for(int i = 0 ; i < n ; i++){
+		if(find(a[i].begin(), a[i].end(), mn) != a[i].end()){
+			vis[i] = true;
+		}
+	}
+	int ans = INT32_MAX - 1;
+	for(int i = 0 ; i < n ; i++){
+		if(!vis[i]){
+			ans = min(ans, *min_element(a[i].begin(), a[i].end()));
+		}		
+	}
+	cout << (ans == INT32_MAX - 1 ? mn : ans) << '\n';
 }
 
 int main(){
