@@ -13,16 +13,14 @@ void solve(){
 		cin >> a[i];
 	}
 	
+	ll mn = LLONG_MAX - 1;
 	ll mx = -1;
 	int idx = -1;
 	for(int i = 0 ; i < k ; i++){
-		if(n%a[i] == 0){
-			cout << i + 1 << ' ' << n/a[i] << '\n';
-			return;  	
-		}
-		if(n/a[i] >= mx){
+		if(mn > n%a[i]){
 			mx = n/a[i];
 			idx = i+1;
+			mn = n%a[i];
 		}
 	}
 	cout << idx << ' ' << mx << '\n';
