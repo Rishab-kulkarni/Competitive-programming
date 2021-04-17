@@ -1,19 +1,31 @@
+
 #include<bits/stdc++.h>
 
 using namespace std;
 typedef long long ll;
 
 void solve(){
-	// check if n+1 is a power of 2 then ans = (n+1)/2 else ans = n+1;
-	ll n; cin >> n;
+	ll n,k;
+	cin >> n >> k;
 	
-	if(n == 0){
-		cout << 0 << '\n';
-		return;
+	vector<ll> a(k);
+	for(int i = 0 ; i < k ; i++){
+		cin >> a[i];
 	}
 	
-	if(n & 1) cout << (n+1)/2 << '\n';
-	else cout << n+1 << '\n';
+	ll mx = -1;
+	int idx = -1;
+	for(int i = 0 ; i < k ; i++){
+		if(n%a[i] == 0){
+			cout << i + 1 << ' ' << n/a[i] << '\n';
+			return;  	
+		}
+		if(n/a[i] >= mx){
+			mx = n/a[i];
+			idx = i+1;
+		}
+	}
+	cout << idx << ' ' << mx << '\n';
 }
 
 int main() {
