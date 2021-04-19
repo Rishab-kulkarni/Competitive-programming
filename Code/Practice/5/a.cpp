@@ -4,12 +4,17 @@
 using namespace std;
 typedef long long ll;
 
+const int MOD = 1e9 + 7;
+
 void solve(){
-	ll a,b,n,S;
+	// 1 mod 6
+	int n;
+	cin >> n;
 	
-	cin >> a >> b >> n >> S;
 	
-	cout << (a*n + b >= S && S%n >= 0 && S%n <= b ? "YES" : "NO") << '\n';
+	
+	
+	
 }
 
 int main() {
