@@ -4,18 +4,17 @@
 using namespace std;
 typedef long long ll;
 
-const int MOD = 1e9 + 7;
-
 void solve(){
-	int n,k;
-	cin >> n >> k;
-	
-	ll ans = n;
-	for(int i = 0 ; i < k-1 ; i++){
-		ans *= n;
-		ans %= MOD;
+	int n; cin >> n;
+	vector<int> a(n);
+	bool ok = false;
+	for(int i = 0 ; i < n ; ++i){
+		cin >> a[i];
+		if(floor(sqrt(a[i])) != ceil(sqrt(a[i]))){
+			ok = true;
+		}
 	}
-	cout << ans << endl;
+	cout << (ok ? "YES" : "NO") << endl;
 }
 
 int main() {
