@@ -5,17 +5,24 @@ using namespace std;
 typedef long long ll;
 
 void solve(){
-	ll x; cin >> x;
-	ll val = 0, cnt = 1;
-	while(true){
-		val += cnt;
-		if(val >=x){
-			if(val - x == 1) cout << cnt + 1 << '\n';
-			else cout << cnt << '\n';
-			break;
-		}
-		cnt++;
+	int n; cin >> n;
+	vector<int> a(n);
+	for(auto &x : a) cin >> x;
+	
+	int cnt = 0;
+	for(int i = 0 ; i < n ; i++){
+//		int tmp = a[i];
+//		a.erase(a.begin() + i);
+		int sum1 = 0, sum2 = 0;
+		int lo1 = 0, lo2 = 1;
+		int hi1 =  
+		
+		
+		
+		cnt += (sum1 == sum2);
+		a.insert(a.begin() + i, tmp);
 	}
+	cout << cnt << '\n';
 }
 
 int main() {
@@ -24,7 +31,7 @@ int main() {
 	cin.tie(0);
 
 	int t = 1;
-	cin >> t;
+//	cin >> t;
 	while(t--){
     	solve();
 	}
