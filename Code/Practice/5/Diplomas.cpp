@@ -4,14 +4,14 @@
 using namespace std;
 typedef long long ll;
 
-void solve(){	
-	// find x
+void solve(){
+	ll n,k;
+	cin >> n >> k;
 	
-	int n; cin >> n;
-	vector<int> a(n);
-	for(int i = 0 ; i < n ; i++) cin >> a[i];
+	ll dips = n/(2*(k+1));
+	ll certifs = k*dips;
 	
-	
+	cout << dips << ' ' << certifs << ' ' << n - (certifs + dips) << '\n'; 
 }
 
 int main() {
@@ -20,7 +20,7 @@ int main() {
 	cin.tie(0);
 
 	int t = 1;
-	cin >> t;
+//	cin >> t;
 	while(t--){
     	solve();
 	}
