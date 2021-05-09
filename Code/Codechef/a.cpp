@@ -61,65 +61,60 @@ void solve(){
 		}
 	}
 	
-	
-	if(empty == 0){
-		
-	}
-	
-	
-	if(x == 0 && o == 0){
+	if(x < o || abs(x-o) > 1){
 		cout << 3 << '\n';
 		return;
 	}
-	
-	if(x < o){
-		cout << 3 << '\n';
-		return;
-	}
-	
-	if(abs(x - o) > 1){
-		cout << 3 << '\n';
-		return;
-	}
-	
-	
-	
+
 	// for unreachable state - 3
-		// if X or O is winner on both (row and col) or (col and diag) or (row and diag) 
-		// if X and O both are winners on (row and row) or (row and col) or (col and col) or (col and row) or 
-	
-	for(auto ch : {'X', 'O'})
-	 if((row(s, ch) && col(s,ch)) || (col(s,ch) && (diag(s, ch) || crossdiag(s,ch))) || (row(s,ch) && (diag(s, ch) || crossdiag(s,ch)))){
-	 	cout << 3 << '\n';
-	 	return;
-	 }
-	
-	if((row(s,'X') && row(s,'O')) || (row(s,'O') && row(s,'X')) || (col(s,'X') && col(s,'O')) || (col(s,'O') && col(s,'X')) || (row(s,'X') 				&& col(s,'O')) || ((row(s,'O') && col(s,'X')))){
-		cout << 3 << '\n';
-		return;
+		// if X or O is winner on both (row, row) (col, col) 
+		
+	bool xwins = row(s, 'X') || col(s,'X') || diag(s,'X') || crossdiag(s, 'X');
+	bool ywins = row(s, 'O') || col(s,'O') || diag(s,'O') || crossdiag(s, 'O');		
+		
+		
+	if(empty == 0){
+		if(x - o != 1){
+			cout << 3 << '\n';
+		}
+		else{
+		
+			if(xwins && ywins){
+				cout << 3 << '\n'; return;
+			}
+		
+			if((!xwins && ywins) || (xwins && !ywins) || (!xwins && !ywins)){
+				cout << 1 << '\n'; return;
+			}
+		}
 	}
 	
-	if(row(s,'X') || row(s,'O') || col(s,'X') || col(s,'O') || diag(s, 'X') || diag(s, 'O') || crossdiag(s,'X') || crossdiag(s, 'O')){
-		cout << "hi" << '\n';
-		cout << 1 << '\n';
-		return;
-	}
+	else {
+		
+		// check who is winning either x or o
+		
+		if(xwins && ywins){
+			cout << 3 << '\n'; return;
+		}
+		
 	
-	if(empty >= 1){
-		cout << 2 << '\n';
-	} else{
-		cout << "hi" << endl;
-		cout << 1 << '\n';
-	}
+		if(xwins){	// check count
+			if(x - o == 1) cout << 1 << '\n';
+			else cout << 3 << '\n';
+		}
+		
+		else if(ywins){
+			if(x - o == o) cout << 1 << '\n';
+			else cout << 3 << '\n';
+		}
+		
+		if(!xwins && !ywins){
+			cout << 2 << '\n';
+		}
 	
-	
-	// after these conditions the possible answers can be 1 or 2
-	// if atleast one _ is present and none of them are winners then ans is 1 else 2
-	
-//X_X
-//OOO
-//X__
+	}	
 }
+	
 
 int main() {
 
@@ -132,4 +127,11 @@ int main() {
     	solve();
 	}
 }
+
+/*
+XOX
+XXO
+OXO
+*/
+
 

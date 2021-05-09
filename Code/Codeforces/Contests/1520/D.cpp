@@ -6,12 +6,18 @@ typedef long long ll;
 
 void solve(){	
 	int n; cin >> n;
-	string s; cin >> s;
 	
+	ll val = 0;
+	map<ll,ll> mp;
+	for(int i = 0 ; i < n ; i++){
+		int x;cin >> x;
+		mp[x - i]++;
+	}
 	
-	
-	
-	
+	for(auto it : mp){
+		val += it.second*(it.second - 1)/2;
+	}
+	cout << val << '\n';
 }
 
 int main() {
