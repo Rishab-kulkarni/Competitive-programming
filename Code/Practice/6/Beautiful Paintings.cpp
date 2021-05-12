@@ -7,16 +7,18 @@ typedef long long ll;
 
 void solve() {
 	int n; cin >> n;
-	vector<int> a(n);
-	for(int i = 0 ; i < n ; i++) cin >> a[i];
-	
-	sort(a.begin(), a.end());
-	
-	int cnt = 0;	
-	for(int i = 0 ; i < n-1 ; i++){
-		cnt += a[i+1] > a[i];
+	map<int,int> m;
+	for(int i = 0 ; i < n ; i++){
+		int x; cin >> x;
+		m[x]++;
 	}
-	cout << cnt << '\n';
+	
+	int cnt = -1;
+	for(auto it : m){
+		cnt = max(cnt,it.second); 
+	}
+	
+	cout << n - cnt << '\n';
 }
 
 
