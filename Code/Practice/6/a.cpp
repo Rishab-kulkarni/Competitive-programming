@@ -4,18 +4,12 @@
 using namespace std;
 typedef long long ll;
 
-void solve() {
-	ll l,r,x,y,k;
-	cin >> l >> r >> x >> y >> k;
-	
-	for(int i = x ; i <= y ; i++){
-		if(k*i >= l && k*i <= r){
-			cout << "YES\n"; return;
-		}
-	}  
-	cout << "NO\n";
-}
+const ll INF = 1e18; 
 
+void solve() {
+	
+	
+}
 
 int main() {
  
