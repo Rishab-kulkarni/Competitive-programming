@@ -1,3 +1,7 @@
+// Finding factors of a number in O(sqrt(n))		-> Naive method O(n)
+// Check for sqrt -> precision errors
+
+// Idea - Factors exist in a pair, co-factors and only check upto sqrt(n)
 
 #include<bits/stdc++.h>
 
@@ -21,8 +25,8 @@ void solve(){
 		}
 	}
 	sort(factors.begin(), factors.end());
-	cout << factors[(int)factors.size() - 2] << ' ' << n - factors[(int)factors.size() - 2] << '\n';
-	
+	for(auto val : factors) cout << val << ' ';
+	cout << '\n';
 }
 
 int main() {
@@ -31,8 +35,9 @@ int main() {
 	cin.tie(NULL);
 	
 	int t = 1;
-	cin >> t;
+//	cin >> t;
 	while(t--){
 		solve();
 	}
 }
+
