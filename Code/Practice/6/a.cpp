@@ -5,24 +5,24 @@ using namespace std;
 typedef long long ll;
 
 void solve(){
-	ll n; cin >> n;
-
-	ll val = sqrtl(n);
-	vector<ll> factors;
-	for(int i = 1 ;  i <= val ; ++i){
-		if(n%i == 0){
-			if(n/i == i){
-				factors.push_back(i); 
-			}
-			else {
-				factors.push_back(n/i);
-				factors.push_back(i);
-			}
-		}
-	}
-	sort(factors.begin(), factors.end());
-	cout << factors[(int)factors.size() - 2] << ' ' << n - factors[(int)factors.size() - 2] << '\n';
+	ll a,b,n,m;
+	cin >> a >> b >> n >> m;
 	
+	if(a < b){
+		cout << "No\n";
+		return;
+	}	
+		
+	if(n == 0 || m == 0){
+		if(n == 0 && m == 0){
+			cout << "Yes\n"; return;
+		}
+		if(n == 0) cout << (a + b >= m ? "Yes" : "No") << '\n';
+		if(m == 0) cout << (a + b >= n ? "Yes" : "No") << '\n'; 
+		return;
+	}
+	
+	cout << (a + b >= n + m ? "Yes" : "No") << '\n';
 }
 
 int main() {
