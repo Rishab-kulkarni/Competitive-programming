@@ -5,41 +5,78 @@ using namespace std;
 typedef long long ll;
 
 void solve() {
-	int n,m; cin >> n >> m;
-	string s,t; cin >> s >> t;
+	// if two chars same, no of ques b/w them are odd consider that substring
+	// if two chars diff, no of ques b/w them are even consider that substring
+	string s; cin >> s;
+	int n = s.size();
 	
-	int star = count(s.begin(), s.end(), '*');
+	int ques = count(s.begin(), s.end(), '?');
 	
-	if(star == 0){
-		cout << (s == t ? "YES" : "NO") << '\n'; return;
+	if(ques == n){
+		cout << (ques*(ques + 1))/2 << '\n'; return;
 	}
-	if(n - 1 > m ){
-		cout << "NO\n"; return;
-	}
 	
-	int j = 0;
+	
+	ll cnt = 0, ans = 0;
+	
+	int len = 0;
+	
+	
 	for(int i = 0 ; i < n ; ++i){
-		if(s[i] != '*'){
-			if(s[i] != t[j]){
-				cout << "NO\n"; return;
+		if(s[i] == '?' && i - 1 >= 0){
+			if(s[i-1] == '0'){
+				s[i] = '1';
+				len++;
+				cnt = ((len+1)*(len+2))/2;
+				
 			}
-			else j++;
+			else if(s[i-1] == '1'){
+				s[i] = '0';
+				len++;
+				cnt = ((len+1)*(len+2))/2;
+				
+			}	
 		}
-		else break;
-	}
-	
-	j = m-1;
-	for(int i = n-1 ; i >= 0 ; i--){
-		if(s[i] != '*'){
-			if(s[i] != t[j]){
-				cout << "NO\n"; return;
+		else{
+			if(s[i] == '0'){
+				if(i - 1 < 0){
+					cnt++;
+					len++;
+				}
+				
+				else if(s[i-1] == '1'){
+					len++;
+					cnt = ((len+1)*(len+2))/2;
+				}
+				else if(s[i-1] == '0'){
+					ans += cnt;
+					cnt = 0;
+					len = 0;
+				}
 			}
-			else j--;
+			
+			else if(s[i] == '1'){
+				if(i -1 < 0){
+					cnt++;
+				}
+				
+				else if(s[i-1] == '0'){
+					len++;
+					cnt = ((len+1)*(len+2))/2;
+				}
+				else if(s[i-1] == '1'){
+					ans += cnt;
+					cnt = 0;
+					len = 0;
+				}
+			}
 		}
-		else break;
 	}
+//	if(cnt != 0) ans += cnt;
+	cout << ans + n - 2<< '\n';
 	
-	cout << "YES\n"; 
+	
+	
 }
 
 int main() {
@@ -48,7 +85,7 @@ int main() {
  	cin.tie(NULL);
  	
  	int t = 1;
-// 	cin >> t;
+	cin >> t;
  	while(t--) {
  		solve();
  	}
