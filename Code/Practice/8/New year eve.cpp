@@ -5,10 +5,18 @@ using namespace std;
 typedef long long ll;
 
 void solve() {
-	int n,k;
+	ll n,k;
 	cin >> n >> k;
 	
-	for(int i = 1 ; 
+	if(k == 1){
+		cout << n << '\n';
+	}
+	else {
+		ll ans = 1;
+		while(ans <= n) ans *= 2;
+		cout << ans - 1 << '\n';
+	}
+	
 }
 
 int main() {
